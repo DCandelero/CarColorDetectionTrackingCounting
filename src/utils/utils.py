@@ -1,3 +1,5 @@
+import numpy as np
+
 def get_car_counted(blobs_list, cars_counted, frame):
     cars = [] # (car_id, car_img) 
 
@@ -17,3 +19,14 @@ def get_car_counted(blobs_list, cars_counted, frame):
             cars.append((blob_id, car_img))
             
     return cars
+
+def pad_images(img, padding_limit):
+    if(img.shape[0] < padding_limit):
+        top_padding = int((padding_limit - img.shape[0]) / 2)
+        bottom_padding = int((padding_limit - img.shape[0]) / 2)
+    if(img.shape[1] < padding_limit):
+        left_padding = int((padding_limit - img.shape[1]) / 2)
+        right_padding = int((padding_limit - img.shape[1]) / 2)
+    pad_image = np.pad(img, ((top_padding, bottom_padding), (left_padding, right_padding), (0, 0)), constant_values=255)[:,:,0]
+
+    return pad_image
