@@ -1,0 +1,6 @@
+./Data/drone*
+./Data/sample*
+
+./Output
+
+./Detectors/yolov3.weights
