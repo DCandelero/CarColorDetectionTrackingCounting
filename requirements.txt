@@ -1,4 +1,8 @@
-opencv-contrib-python==4.5.4.60
 numpy==1.21.4
 requests==2.26.0
 numpy==1.21.4
+pandas==1.4.0
+streamlit==1.11.0
+matplotlib==3.5.1
+scipy==1.7.3
+opencv-contrib-python-headless==4.5.4.60
