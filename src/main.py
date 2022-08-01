@@ -160,11 +160,13 @@ def main():
         frame_count += 1
         ret, frame = cap.read()
 
-        if cv2.waitKey(25) & 0xFF == ord('q'):
-            break
+        # Unccomment the following lines to execute in local machine
+        # if cv2.waitKey(25) & 0xFF == ord('q'):
+        #     break
 
     cap.release()
-    cv2.destroyAllWindows()
+    # Unccomment the following line to execute in local machine
+    # cv2.destroyAllWindows()
 
 if __name__ == "__main__":
     main()
