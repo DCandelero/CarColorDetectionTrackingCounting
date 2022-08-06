@@ -31,8 +31,6 @@ def main():
     else:
         video_path = '../Data/Traffic_Example.mp4'
         control_frame_read = 'Run'
-
-    cap = cv2.VideoCapture(video_path)
     
     # Pandas Dataframe
     df_cars = pd.DataFrame(columns=['CarID', 'CountOrder', 'PredictedColor', 'VideoFrame', 'BoundingBox'])
@@ -48,11 +46,11 @@ def main():
     max_consecutive_failures = 2
     detection_interval = 4
 
-    ret, frame = cap.read()
-    frame = cv2.resize(frame, (960, 540))
+    frame_height = 540
+    frame_width = 960
 
     counting_lines = [
-        [(0, int(frame.shape[0]/2)), (frame.shape[1], int(frame.shape[0]/2))]
+        [(0, int(frame_width/2)), (frame_height, int(frame_width/2))]
     ]
     counts = 0
 
@@ -61,12 +59,21 @@ def main():
         output_video = cv2.VideoWriter("../Output/objectCounter.avi",
             cv2.VideoWriter_fourcc(*'MJPG'), 
             30,
-            (frame.shape[1], frame.shape[0])
+            (frame_height, frame_width)
         )
 
-    # Start detection
-    _bounding_boxes, _classes, _confidences = yolo_detector.get_bounding_boxes(frame)
-    blobs = kfc_tracker.add_new_blobs(_bounding_boxes, _classes, _confidences, blobs, frame, max_consecutive_failures)
+    cap = cv2.VideoCapture(video_path)
+
+    ret, frame = cap.read()
+
+    print('\nRET: ', ret)
+    print('\nFrame: ', frame)
+    if(ret):
+        frame = cv2.resize(frame, (frame_width, frame_height))
+
+        # Start detection
+        _bounding_boxes, _classes, _confidences = yolo_detector.get_bounding_boxes(frame)
+        blobs = kfc_tracker.add_new_blobs(_bounding_boxes, _classes, _confidences, blobs, frame, max_consecutive_failures)
 
     frame_count = 0
     while(ret and control_frame_read != 'Stop'):

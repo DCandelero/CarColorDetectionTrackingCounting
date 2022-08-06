@@ -15,10 +15,14 @@ def set_streamlit_layout():
     if(st_upload_option == 'Youtube link'):
         st_upload_option_value = st.sidebar.text_input('Paste youtube link here!')
     elif(st_upload_option == 'File upload'):
-        st_upload_option_value = st.sidebar.file_uploader('Upload your mp4 file here!')
+        st_upload_option_value = st.sidebar.file_uploader('Upload your mp4 file here!', type=['mp4'], help='Available extensions: Only .mp4')
+        if st_upload_option_value is not None:
+            data_file = open('../Data/uploaded_file.mp4', wb)
+            data_file.write(st_upload_option_value.get_value())
+            data_file.close()
     else:
         st.sidebar.write('Sample video is being used')
-        st_upload_option_value = '../Data/Traffic_Example.mp4'
+        st_upload_option_value = '../Data/4K Road traffic video for object detection and tracking - free download now!.mp4'
     # Sidebar Download
     st_download_flag= st.sidebar.select_slider('Enable data download', options=['No', 'Yes'])
     if(st_download_flag == 'Yes'):
