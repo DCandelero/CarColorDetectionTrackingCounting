@@ -66,8 +66,6 @@ def main():
 
     ret, frame = cap.read()
 
-    print('\nRET: ', ret)
-    print('\nFrame: ', frame)
     if(ret):
         frame = cv2.resize(frame, (frame_width, frame_height))
 
