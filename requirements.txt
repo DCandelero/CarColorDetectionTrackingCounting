@@ -6,3 +6,5 @@ streamlit==1.11.0
 matplotlib==3.5.1
 scipy==1.7.3
 opencv-contrib-python-headless==4.5.4.60
+pafy==0.5.5
+youtube-dl==2021.12.17

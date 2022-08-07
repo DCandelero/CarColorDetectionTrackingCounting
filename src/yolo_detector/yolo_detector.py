@@ -3,10 +3,12 @@ import cv2
 import numpy as np
 
 
+# TODO: CREATE A VERIFICATION TO EXECUTE THE CODE DOWN BELOW ONLY IF THE FILE yolov3.weights DOESNT EXIST
+
 # Download yolo weights
-url = 'https://drive.google.com/file/d/1arP01Q6KCFSRsqLbz8NilCKBU-ulj2dD/view?usp=sharing'
-r = requests.get(url)
-open('yolov3.weights', 'wb').write(r.content)
+# url = 'https://drive.google.com/file/d/1arP01Q6KCFSRsqLbz8NilCKBU-ulj2dD/view?usp=sharing'
+# r = requests.get(url)
+# open('yolov3.weights', 'wb').write(r.content)
 
 with open("./yolo_detector/yolo_config/coco_classes.txt", 'r') as classes_file:
     CLASSES = dict(enumerate([line.strip() for line in classes_file.readlines()]))

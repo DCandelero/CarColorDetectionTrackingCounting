@@ -1,5 +1,6 @@
 import streamlit as st
 from streamlit_utils import streamlit_downloads
+import pafy
 
 def set_streamlit_layout():
     # Streamlit page config
@@ -14,6 +15,9 @@ def set_streamlit_layout():
     st_upload_option = st.sidebar.selectbox('Choose your upload option', ['Sample video', 'Youtube link', 'File upload'])
     if(st_upload_option == 'Youtube link'):
         st_upload_option_value = st.sidebar.text_input('Paste youtube link here!')
+        # if st_upload_option_value != '':
+        #     video = pafy.new(st_upload_option_value)
+        #     st_upload_option_value = video.getbest(preftype="mp4")
     elif(st_upload_option == 'File upload'):
         st_upload_option_value = st.sidebar.file_uploader('Upload your mp4 file here!', type=['mp4'], help='Available extensions: Only .mp4')
         if st_upload_option_value is not None:

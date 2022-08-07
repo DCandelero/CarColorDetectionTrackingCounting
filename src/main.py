@@ -44,13 +44,19 @@ def main():
     # Detector definitions -------------------------------------
     blobs = {}
     max_consecutive_failures = 2
-    detection_interval = 4
+    detection_interval = 5
 
     frame_height = 540
     frame_width = 960
 
+    cap = cv2.VideoCapture(video_path)
+
+    ret, frame = cap.read()
+
+    frame = cv2.resize(frame, (frame_width, frame_height))
+
     counting_lines = [
-        [(0, int(frame_width/2)), (frame_height, int(frame_width/2))]
+        [(0, int(frame_height/2)), (frame_width, int(frame_height/2))]
     ]
     counts = 0
 
@@ -61,10 +67,6 @@ def main():
             30,
             (frame_height, frame_width)
         )
-
-    cap = cv2.VideoCapture(video_path)
-
-    ret, frame = cap.read()
 
     if(ret):
         frame = cv2.resize(frame, (frame_width, frame_height))
@@ -80,7 +82,7 @@ def main():
             print("Frame vazio")
             print(cap.read())
 
-        frame = cv2.resize(frame, (960, 540))
+        frame = cv2.resize(frame, (frame_width, frame_height))
 
         # update blob trackers
         blobs_list = list(blobs.items())
