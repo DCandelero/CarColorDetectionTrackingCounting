@@ -26,7 +26,7 @@ def set_streamlit_layout():
             data_file.close()
             st_upload_option_value = '../Data/uploaded_file.mp4'
     else:
-        radio_choice = st.radio('Choose which sample video will be used:', ['Exemplo1', 'Exemplo2'])
+        radio_choice = st.sidebar.radio('Choose which sample video will be used:', ['Exemplo1', 'Exemplo2'])
         if(radio_choice == ''):
             st_upload_option_value = '../Data/Traffic_Example.mp4'
         else:

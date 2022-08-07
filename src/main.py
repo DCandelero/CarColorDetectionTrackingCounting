@@ -117,7 +117,7 @@ def main():
             car_color_predictions = prediction.get_car_color_predictions(cars)
 
             for idx, (car_id, car_img, color_predicted) in enumerate(car_color_predictions):
-                cars_already_counted_imgs.append((color_predicted+car_id, car_img))
+                cars_already_counted_imgs.append((color_predicted+car_id+'.png', car_img))
 
                 # Padding images to align width and height of the columns
                 car_img_pad = utils.pad_images(car_img, 200)
@@ -141,8 +141,7 @@ def main():
                         if(st_zip_images_download_option):
                             cars_already_counted_imgs_pil  = [(img_name, Image.fromarray(np_img)) for (img_name, np_img) in cars_already_counted_imgs]
                             st_zip_download.markdown(streamlit_downloads.get_zipped_images_download_link(cars_already_counted_imgs_pil, 'cars_imgs.zip', 'Download ZIP'), unsafe_allow_html=True)
-
-
+                            
             cars_already_counted = counts
 
 

@@ -23,18 +23,17 @@ def get_image_download_link(img,filename,text):
     return f'<a href="data:file/txt;base64,{img_str}" download="{filename}">{text}</a>'
 
 
-
-
 def get_zipped_images_download_link(img_list,filename,text):
     zip_file_bytes_io = io.BytesIO()
 
     with ZipFile(zip_file_bytes_io, 'w') as zip_file:
-        buffered = io.BytesIO()
 
         for img_name, img in img_list:
+            buffered = io.BytesIO()
+
             img.save(buffered, format="PNG")
             zip_file.writestr(img_name+".png", buffered.getvalue())
-    
+
     zip_imgs_str = base64.b64encode(zip_file_bytes_io.getvalue()).decode()
     
     return f'<a href="data:file/txt;base64,{zip_imgs_str}" download="{filename}">{text}</a>'
