@@ -10,12 +10,12 @@ import numpy as np
 # r = requests.get(url)
 # open('yolov3.weights', 'wb').write(r.content)
 
-with open("./yolo_detector/yolo_config/coco_classes.txt", 'r') as classes_file:
+with open("./detectors/yolo_config/coco_classes.txt", 'r') as classes_file:
     CLASSES = dict(enumerate([line.strip() for line in classes_file.readlines()]))
-with open("./yolo_detector/yolo_config/coco_classes_of_interest.txt", 'r') as coi_file:
+with open("./detectors/yolo_config/coco_classes_of_interest.txt", 'r') as coi_file:
     CLASSES_OF_INTEREST = tuple([line.strip() for line in coi_file.readlines()])
 conf_threshold = 0.5
-net = cv2.dnn.readNet("./yolo_detector/yolo_config/yolov3.weights", "./yolo_detector/yolo_config/yolov3.cfg")
+net = cv2.dnn.readNet("./detectors/yolo_config/yolov3.weights", "./detectors/yolo_config/yolov3.cfg")
 
 def get_bounding_boxes(image):
     '''

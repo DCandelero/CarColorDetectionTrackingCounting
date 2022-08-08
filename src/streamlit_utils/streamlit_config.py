@@ -27,10 +27,10 @@ def set_streamlit_layout():
             st_upload_option_value = '../Data/uploaded_file.mp4'
     else:
         radio_choice = st.sidebar.radio('Choose which sample video will be used:', ['Exemplo1', 'Exemplo2'])
-        if(radio_choice == ''):
+        if(radio_choice == 'Exemplo1'):
             st_upload_option_value = '../Data/Traffic_Example.mp4'
         else:
-            st_upload_option_value = '../Data/4K Road traffic video for object detection and tracking - free download now!.mp4'
+            st_upload_option_value = '../Data/videoplayback.webm'
     # Sidebar Download
     st_download_flag= st.sidebar.select_slider('Enable data download', options=['No', 'Yes'])
     if(st_download_flag == 'Yes'):

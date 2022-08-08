@@ -8,7 +8,9 @@ from copy import copy
 
 # My Libs
 from kfc_tracker import kfc_tracker
-from yolo_detector import yolo_detector
+from detectors import yolo_detector
+from detectors import haar_cascade
+from detectors import background_subtractor
 from car_color_classification import prediction
 from utils import counter
 from utils import visualizer
