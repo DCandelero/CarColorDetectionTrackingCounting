@@ -62,13 +62,12 @@ def main():
     ]
     counts = 0
 
-    if(not streamlit_enable):
-        # Output config write
-        output_video = cv2.VideoWriter("../Output/objectCounter.avi",
-            cv2.VideoWriter_fourcc(*'MJPG'), 
-            30,
-            (frame_height, frame_width)
-        )
+    # Output config write
+    output_video = cv2.VideoWriter("../Output/objectCounter.avi",
+        cv2.VideoWriter_fourcc(*'MJPG'), 
+        30,
+        (960, 540)
+    )
 
     if(ret):
         frame = cv2.resize(frame, (frame_width, frame_height))
@@ -155,15 +154,16 @@ def main():
         frame_copy = copy(frame)
         output_frame = visualizer.visualize(frame_copy, blobs, fps, counts)
 
-        # Record frames and display result ----------------------------------------------------------------------------
+        # Display result ----------------------------------------------------------------------------
         if(not streamlit_enable):
-            output_video.write(output_frame)
             cv2.imshow("output_frame", output_frame)
 
         # Display frame (Streamlit)
         if(streamlit_enable):
             st_video.image(output_frame)
-        
+
+        # Record frames
+        output_video.write(output_frame)
 
         frame_count += 1
         ret, frame = cap.read()

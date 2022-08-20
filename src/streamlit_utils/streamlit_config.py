@@ -35,12 +35,16 @@ def set_streamlit_layout():
     st_download_flag= st.sidebar.select_slider('Enable data download', options=['No', 'Yes'])
     if(st_download_flag == 'Yes'):
         st_csv_download_option = st.sidebar.checkbox('CSV DataFrame')
-        st_zip_images_download_option = st.sidebar.checkbox('Last car 30 images (PNG)')
+        st_zip_images_download_option = st.sidebar.checkbox('Download car images (PNG)')
     else:
         st_csv_download_option = 0
         st_zip_images_download_option = 0
     st_df_download = st.sidebar.empty() # DataFrame Download
     st_zip_download = st.sidebar.empty() # Zipped images Download
+
+    if(st_control_option == 'Stop'):
+        with open('../Output/objectCounter.avi', 'rb') as f:
+            st.sidebar.download_button('Download video', f, file_name='output.mp4')
 
     return (st_cols, st_video, st_df, st_control_option, st_download_flag, st_csv_download_option, 
         st_zip_images_download_option, st_df_download, st_zip_download, st_upload_option_value)
