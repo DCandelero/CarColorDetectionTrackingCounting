@@ -125,7 +125,7 @@ def main():
 
                 # Update dataframe
                 df_car = pd.DataFrame([[car_id, cars_already_counted+idx, color_predicted, '-', '-']], columns=['CarID', 'CountOrder', 'PredictedColor', 'VideoFrame', 'BoundingBox'])
-                df_cars = df_cars.append(df_car, ignore_index=True)
+                df_cars = pd.concat([df_cars, df_car])
 
                 if(streamlit_enable):
                     # Display imgs and df on streamlit
