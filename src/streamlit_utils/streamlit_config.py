@@ -12,7 +12,7 @@ def set_streamlit_layout():
     # Sidebar Control
     st_control_option = st.sidebar.selectbox('Control Comands', ['Stop', 'Start', 'Restart'])
     # Sidebar Upload
-    st_upload_option = st.sidebar.selectbox('Choose your upload option', ['Sample video', 'Youtube link', 'File upload'])
+    st_upload_option = st.sidebar.selectbox('Choose your upload option', ['Sample video', 'Youtube link', 'File upload', 'Cam IP - rtsp url'])
     if(st_upload_option == 'Youtube link'):
         st_upload_option_value = st.sidebar.text_input('Paste youtube link here!')
         # if st_upload_option_value != '':
@@ -25,8 +25,8 @@ def set_streamlit_layout():
             data_file.write(st_upload_option_value.getvalue())
             data_file.close()
             st_upload_option_value = '../Data/uploaded_file.mp4'
-        else:
-            st_upload_option_value = '../Data/Traffic_Example.mp4'
+    elif(st_upload_option == 'Cam IP - rtsp url'):
+        st_upload_option_value = st.sidebar.text_input('Paste rtsp url here!')
     else:
         radio_choice = st.sidebar.radio('Choose which sample video will be used:', ['Exemplo1', 'Exemplo2'])
         if(radio_choice == 'Exemplo1'):

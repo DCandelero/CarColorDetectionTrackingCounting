@@ -29,7 +29,10 @@ def main():
             st_df_download, st_zip_download, st_upload_option_value) = streamlit_config.set_streamlit_layout()
 
         control_frame_read = st_control_option
-        video_path = st_upload_option_value
+        if (st_upload_option_value):
+            video_path = st_upload_option_value
+        else:
+            video_path = '../Data/Traffic_Example.mp4'
     else:
         video_path = '../Data/Traffic_Example.mp4'
         control_frame_read = 'Run'
@@ -155,12 +158,11 @@ def main():
         output_frame = visualizer.visualize(frame_copy, blobs, fps, counts)
 
         # Display result ----------------------------------------------------------------------------
-        if(not streamlit_enable):
-            cv2.imshow("output_frame", output_frame)
-
-        # Display frame (Streamlit)
         if(streamlit_enable):
             st_video.image(output_frame)
+        else:
+            # Display frame (Streamlit)
+            cv2.imshow("output_frame", output_frame)
 
         # Record frames
         output_video.write(output_frame)
