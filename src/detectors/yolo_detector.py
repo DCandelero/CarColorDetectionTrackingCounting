@@ -1,21 +1,27 @@
-import requests
+import os
 import cv2
 import numpy as np
+import gdown
+import zipfile
+
+def download_data(url, folder_path_to_save):
+    data_path = os.path.join(folder_path_to_save, 'yolov3.weights')
+    # Donwload zip
+    gdown.download(url, data_path, quiet=False, fuzzy=True)
 
 
-# TODO: CREATE A VERIFICATION TO EXECUTE THE CODE DOWN BELOW ONLY IF THE FILE yolov3.weights DOESNT EXIST
+yolov3_config_folder_path = os.path.join(os.path.dirname(__file__), 'yolo_config')
+yolov3_weights_path = os.path.join(yolov3_config_folder_path, 'yolov3.weights')
+if(not os.path.isfile(yolov3_weights_path)):
+    download_data('https://drive.google.com/file/d/1unjeL1KZCpUqeDwKCPeR53OCG9A_7x2d/view?usp=sharing', yolov3_config_folder_path)
 
-# Download yolo weights
-# url = 'https://drive.google.com/file/d/1arP01Q6KCFSRsqLbz8NilCKBU-ulj2dD/view?usp=sharing'
-# r = requests.get(url)
-# open('yolov3.weights', 'wb').write(r.content)
 
-with open("./detectors/yolo_config/coco_classes.txt", 'r') as classes_file:
+with open(os.path.join(yolov3_config_folder_path, 'coco_classes.txt'), 'r') as classes_file:
     CLASSES = dict(enumerate([line.strip() for line in classes_file.readlines()]))
-with open("./detectors/yolo_config/coco_classes_of_interest.txt", 'r') as coi_file:
+with open(os.path.join(yolov3_config_folder_path, 'coco_classes_of_interest.txt'), 'r') as coi_file:
     CLASSES_OF_INTEREST = tuple([line.strip() for line in coi_file.readlines()])
 conf_threshold = 0.5
-net = cv2.dnn.readNet("./detectors/yolo_config/yolov3.weights", "./detectors/yolo_config/yolov3.cfg")
+net = cv2.dnn.readNet(yolov3_weights_path, os.path.join(yolov3_config_folder_path, 'yolov3.cfg'))
 
 def get_bounding_boxes(image):
     '''
