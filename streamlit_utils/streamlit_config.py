@@ -1,5 +1,4 @@
 import streamlit as st
-from streamlit_utils import streamlit_downloads
 import pafy
 
 def set_streamlit_layout():
@@ -24,18 +23,18 @@ def set_streamlit_layout():
     elif(st_upload_option == 'File upload'):
         st_upload_option_value = st.sidebar.file_uploader('Upload your mp4 file here!', type=['mp4'], help='Available extensions: Only .mp4')
         if st_upload_option_value is not None:
-            data_file = open('../Data/uploaded_file.mp4', 'wb')
+            data_file = open('./Data/uploaded_file.mp4', 'wb')
             data_file.write(st_upload_option_value.getvalue())
             data_file.close()
-            st_upload_option_value = '../Data/uploaded_file.mp4'
+            st_upload_option_value = './Data/uploaded_file.mp4'
     elif(st_upload_option == 'Cam IP - rtsp url'):
         st_upload_option_value = st.sidebar.text_input('Paste rtsp url here!')
     else:
         radio_choice = st.sidebar.radio('Choose which sample video will be used:', ['Exemplo1', 'Exemplo2'])
         if(radio_choice == 'Exemplo1'):
-            st_upload_option_value = '../Data/Traffic_Example.mp4'
+            st_upload_option_value = './Data/Traffic_Example.mp4'
         else:
-            st_upload_option_value = '../Data/videoplayback.webm'
+            st_upload_option_value = './Data/videoplayback.webm'
     # Sidebar Download
     st_download_flag= st.sidebar.select_slider('Enable data download', options=['No', 'Yes'])
     if(st_download_flag == 'Yes'):
@@ -48,7 +47,7 @@ def set_streamlit_layout():
     st_zip_download = st.sidebar.empty() # Zipped images Download
 
     if(st_control_option == 'Stop'):
-        with open('../Output/objectCounter.avi', 'rb') as f:
+        with open('./Output/objectCounter.avi', 'rb') as f:
             st.sidebar.download_button('Download video', f, file_name='output.mp4')
 
     return (st_cols, st_video, st_df, st_control_option, st_download_flag, st_csv_download_option, 

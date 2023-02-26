@@ -7,14 +7,14 @@ from PIL import Image
 from copy import copy
 
 # My Libs
-from kfc_tracker import kfc_tracker
-from detectors import yolo_detector
-from detectors import haar_cascade
-from detectors import background_subtractor
-from car_color_classification import prediction
-from utils import counter
-from utils import visualizer
-from utils import utils
+from src.kfc_tracker import kfc_tracker
+from src.detectors import yolo_detector
+from src.detectors import haar_cascade
+from src.detectors import background_subtractor
+from src.car_color_classification import prediction
+from src.utils import counter
+from src.utils import visualizer
+from src.utils import utils
 from streamlit_utils import streamlit_config
 from streamlit_utils import streamlit_downloads
 
@@ -66,7 +66,7 @@ def main():
     counts = 0
 
     # Output config write
-    output_video = cv2.VideoWriter("../Output/objectCounter.avi",
+    output_video = cv2.VideoWriter("./Output/objectCounter.avi",
         cv2.VideoWriter_fourcc(*'MJPG'), 
         30,
         (960, 540)

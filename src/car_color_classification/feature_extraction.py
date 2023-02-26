@@ -34,7 +34,7 @@ def color_histogram_of_test_image(test_src_image):
             feature_data = red + ',' + green + ',' + blue
             # print(feature_data)
 
-    with open('./car_color_classification/Data/test.data', 'w') as myfile:
+    with open('src/car_color_classification/Data/test.data', 'w') as myfile:
         myfile.write(feature_data)
 
 
@@ -79,5 +79,5 @@ def color_histogram_of_training_image(img_name):
             red = str(elem)
             feature_data = red + ',' + green + ',' + blue
 
-    with open('./car_color_classification/Data/training.data', 'a') as myfile:
+    with open('src/car_color_classification/Data/training.data', 'a') as myfile:
         myfile.write(feature_data + ',' + data_source + '\n')
