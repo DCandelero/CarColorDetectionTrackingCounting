@@ -47,8 +47,11 @@ def set_streamlit_layout():
     st_zip_download = st.sidebar.empty() # Zipped images Download
 
     if(st_control_option == 'Stop'):
-        with open('./Output/objectCounter.avi', 'rb') as f:
-            st.sidebar.download_button('Download video', f, file_name='output.mp4')
+        try:
+            with open('./Output/objectCounter.avi', 'rb') as f:
+                st.sidebar.download_button('Download video', f, file_name='output.mp4')
+        except FileNotFoundError:
+            pass
 
     return (st_cols, st_video, st_df, st_control_option, st_download_flag, st_csv_download_option, 
         st_zip_images_download_option, st_df_download, st_zip_download, st_upload_option_value)
