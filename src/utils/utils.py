@@ -37,6 +37,6 @@ def pad_images(img, padding_limit):
     else:
         left_padding = 0
         right_padding = 0
-    pad_image = np.pad(img, ((top_padding, bottom_padding), (left_padding, right_padding), (0, 0)), constant_values=255)[:,:,0]
+    pad_image = np.pad(img, ((top_padding, bottom_padding), (left_padding, right_padding), (0, 0)), constant_values=255)
 
     return pad_image

@@ -49,7 +49,7 @@ def main():
     # Detector definitions -------------------------------------
     blobs = {}
     max_consecutive_failures = 2
-    detection_interval = 5
+    detection_interval = 4
 
     frame_height = 540
     frame_width = 960
@@ -81,10 +81,6 @@ def main():
 
     frame_count = 0
     while(ret and control_frame_read != 'Stop'):
-
-        if(frame is None):
-            print("Frame vazio")
-            print(cap.read())
 
         frame = cv2.resize(frame, (frame_width, frame_height))
 
@@ -140,11 +136,11 @@ def main():
                     # Update download button on streamlit
                     if(st_download_flag == 'Yes'):
                         if(st_csv_download_option):
-                            tmp_download_link = streamlit_downloads.get_download_link(df_cars, 'df_cars.csv', 'Click here to download your data!')
+                            tmp_download_link = streamlit_downloads.get_download_link(df_cars, 'df_cars.csv', 'Click here to download your csv data!')
                             st_df_download.markdown(tmp_download_link, unsafe_allow_html=True)
                         if(st_zip_images_download_option):
                             cars_already_counted_imgs_pil  = [(img_name, Image.fromarray(np_img)) for (img_name, np_img) in cars_already_counted_imgs]
-                            st_zip_download.markdown(streamlit_downloads.get_zipped_images_download_link(cars_already_counted_imgs_pil, 'cars_imgs.zip', 'Download ZIP'), unsafe_allow_html=True)
+                            st_zip_download.markdown(streamlit_downloads.get_zipped_images_download_link(cars_already_counted_imgs_pil, 'cars_imgs.zip', 'Download car images'), unsafe_allow_html=True)
                             
             cars_already_counted = counts
 
