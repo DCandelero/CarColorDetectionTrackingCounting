@@ -58,13 +58,6 @@ def main():
 
     ret, frame = cap.read()
 
-    frame = cv2.resize(frame, (frame_width, frame_height))
-
-    counting_lines = [
-        [(0, int(frame_height/2)), (frame_width, int(frame_height/2))]
-    ]
-    counts = 0
-
     # Output config write
     output_video = cv2.VideoWriter("./Output/objectCounter.avi",
         cv2.VideoWriter_fourcc(*'MJPG'), 
@@ -73,6 +66,11 @@ def main():
     )
 
     if(ret):
+        counting_lines = [
+            [(0, int(frame_height/2)), (frame_width, int(frame_height/2))]
+        ]
+        counts = 0
+
         frame = cv2.resize(frame, (frame_width, frame_height))
 
         # Start detection
