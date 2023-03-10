@@ -7,4 +7,4 @@ COPY ./Data ../Data
 EXPOSE 8501
 COPY ./src .
 ENTRYPOINT ["streamlit", "run"]
-CMD ["./streamlit_app.py", "--server.headless", "true"]
+CMD ["streamlit_app.py", "--server.headless", "true"]
