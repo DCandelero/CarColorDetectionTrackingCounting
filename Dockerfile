@@ -5,6 +5,6 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 COPY ./Data ../Data
 EXPOSE 8501
-COPY ./src .
+COPY . /app
 ENTRYPOINT ["streamlit", "run"]
 CMD ["streamlit_app.py", "--server.headless", "true"]
