@@ -9,6 +9,7 @@ from copy import copy
 # My Libs
 from src.kfc_tracker import kfc_tracker
 from src.detectors import yolo_detector
+# from src.detectors import yolov8_detector
 from src.detectors import haar_cascade
 from src.detectors import background_subtractor
 from src.car_color_classification import prediction
@@ -78,7 +79,7 @@ def main():
         blobs = kfc_tracker.add_new_blobs(_bounding_boxes, _classes, _confidences, blobs, frame, max_consecutive_failures)
 
     frame_count = 0
-    while(ret and control_frame_read != 'Stop'):
+    while(ret):
 
         frame = cv2.resize(frame, (frame_width, frame_height))
 
@@ -167,6 +168,9 @@ def main():
         # Unccomment the following lines to execute in local machine
         # if cv2.waitKey(25) & 0xFF == ord('q'):
         #     break
+
+        if control_frame_read == 'Stop':
+            break
 
     cap.release()
     # Unccomment the following line to execute in local machine
